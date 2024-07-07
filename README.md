@@ -1,6 +1,6 @@
-# WeatherAppProjekt
+# WeatherApp
 
-Welcome to WeatherAppProjekt! This is a simple weather application built using Jetpack Compose for Android. The app fetches weather data from the OpenWeather API and displays the current weather for a specified city.
+Welcome to WeatherApp This is a simple weather application built using Jetpack Compose for Android. The app fetches weather data from the OpenWeather API and displays the current weather for a specified city.
 
 ## Features
 
