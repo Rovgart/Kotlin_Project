@@ -58,6 +58,7 @@ fun WeatherApp() {
     var city by remember { mutableStateOf("") }
     var weather by remember { mutableStateOf<WeatherResponse?>(null) }
     var loading by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
 
     Box(
@@ -96,7 +97,10 @@ fun WeatherApp() {
 
             OutlinedTextField(
                 value = city,
-                onValueChange = { city = it },
+                onValueChange = {
+                    city = it
+                    error = false // reset error on text change
+                },
                 label = { Text("Enter city name") },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color(android.graphics.Color.parseColor("#02a9ea")),
@@ -114,15 +118,18 @@ fun WeatherApp() {
                         delay(2000) // Simulate loading for 2 seconds
                         weather = fetchWeather(city)
                         loading = false
+                        if (weather == null) {
+                            error = true
+                        }
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(android.graphics.Color.parseColor("#02a9ea"))
-                ),                modifier = Modifier
+                ),
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-            )
-            {
+            ) {
                 Text(
                     text = "Get Weather",
                     fontSize = 16.sp,
@@ -131,6 +138,15 @@ fun WeatherApp() {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
+
+            if (error) {
+                Text(
+                    text = "Invalid city name, please try again.",
+                    color = Color.Red,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
 
             weather?.let {
                 Column(
@@ -175,7 +191,7 @@ suspend fun fetchWeather(city: String): WeatherResponse? {
             val request = Request.Builder()
                 .url("https://open-weather13.p.rapidapi.com/city/$city/EN")
                 .get()
-                .addHeader("x-rapidapi-key", "7033bc2d40msha5f4a1d890a3ae5p18d44bjsnedf75157c7ff")
+                .addHeader("x-rapidapi-key", "8a7aeb50admsh65a7200976309c2p10bee7jsn9cbef9cbcb04")
                 .addHeader("x-rapidapi-host", "open-weather13.p.rapidapi.com")
                 .build()
 
@@ -188,7 +204,7 @@ suspend fun fetchWeather(city: String): WeatherResponse? {
 
             val responseBody = response.body?.string() ?: return@withContext null
             val weatherResponse = Gson().fromJson(responseBody, WeatherResponse::class.java)
-//                Fahrenheit to Celsius
+            // Fahrenheit to Celsius
             val tempCelsius = ((weatherResponse.main.temp - 32) * 5 / 9).roundToInt()
             weatherResponse.copy(main = weatherResponse.main.copy(temp = tempCelsius.toFloat()))
         } catch (e: Exception) {
@@ -197,3 +213,4 @@ suspend fun fetchWeather(city: String): WeatherResponse? {
         }
     }
 }
+
