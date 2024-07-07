@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+<!--    Color Pallete-->
+    <color name="Eerie_black" hex="222222" r="34" g="34" b="34" />
+    <color name="Isabelline" hex="ede6e3" r="237" g="230" b="227" />
+    <color name="Picton_Blue" hex="02a9ea" r="2" g="169" b="234" />
+    <color name="Mint" hex="63a375" r="99" g="163" b="117" />
+    <color name="Ultra_Violet" hex="4b4e6d" r="75" g="78" b="109" />
+</resources>
