@@ -82,7 +82,6 @@ fun WeatherApp() {
                     contentDescription = "Cloud Icon",
                     modifier = Modifier
                         .size(40.dp)
-
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
@@ -140,33 +139,54 @@ fun WeatherApp() {
             Spacer(modifier = Modifier.height(16.dp))
 
             if (error) {
-                Text(
-                    text = "Invalid city name, please try again.",
-                    color = Color.Red,
-                    fontSize = 16.sp,
+                Card(
+                    shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.padding(vertical = 8.dp)
-                )
+                        .background(Color.Red.copy(alpha = 0.1f))
+                ) {
+                    Text(
+                        text = "Invalid city name, please try again.",
+                        color = Color.Red,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
 
             weather?.let {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Spacer(modifier = Modifier.height(16.dp))
+                Card(
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+//                        .background(Color(android.graphics.Color.parseColor("#e0f7fa")))
                 ) {
-                    Text(
-                        text = "City: ${it.name}",
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                    Text(
-                        text = "Temperature: ${it.main.temp.roundToInt()}°C",
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                    Text(
-                        text = "Description: ${it.weather[0].description}",
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "City: ${it.name}",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            color = Color(android.graphics.Color.parseColor("#00796b"))
+                        )
+                        Text(
+                            text = "Temperature: ${it.main.temp.roundToInt()}°C",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            color = Color(android.graphics.Color.parseColor("#00796b"))
+                        )
+                        Text(
+                            text = "Description: ${it.weather[0].description.capitalize()}",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            color = Color(android.graphics.Color.parseColor("#00796b"))
+                        )
+                    }
                 }
             }
         }
@@ -213,4 +233,5 @@ suspend fun fetchWeather(city: String): WeatherResponse? {
         }
     }
 }
+
 
