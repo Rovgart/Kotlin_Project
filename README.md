@@ -18,3 +18,26 @@ Welcome to WeatherAppProjekt! This is a simple weather application built using J
    ```sh
    git clone https://github.com/yourusername/WeatherAppProjekt.git
    cd WeatherAppProjekt
+
+   
+Open the project in Android Studio:
+
+Open Android Studio.
+Select "Open an existing Android Studio project".
+Navigate to the cloned repository and open it.
+Build the project:
+
+Make sure you have the latest version of Android Studio and the necessary SDKs installed.
+Click on the "Build" menu and select "Make Project" or use the shortcut Ctrl+F9.
+Run the app:
+
+Connect an Android device or start an emulator.
+Click the "Run" button or use the shortcut Shift+F10.
+API Key Setup
+To fetch weather data, you need to set up your own API key from RapidAPI's OpenWeatherMap.
+
+Go to RapidAPI and create an account if you don't have one.
+Search for "OpenWeatherMap" and subscribe to the API.
+Replace the placeholder API key in the fetchWeather function with your own API key.
+
+.addHeader("x-rapidapi-key", "YOUR_RAPIDAPI_KEY")
